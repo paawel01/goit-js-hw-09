@@ -1,10 +1,12 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { images } from './images';
-import { initImages } from './gallery';
+import { images } from '../images.js';
+import { initImages } from './gallery.js';
 
-document.querySelector('.gallery').appendChild(initImages(images));
+const galleryContainer = document.querySelector('.gallery');
+galleryContainer.appendChild(initImages(images));
+
 
 const lightbox = new SimpleLightbox('ul.gallery a', {
   captionsData: 'alt',
