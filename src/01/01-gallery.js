@@ -1,46 +1,16 @@
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { images } from "./images";
+import { images } from './images';
+import { initImages } from './gallery';
 
-/*
-     {
-        preview:
-          'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
-        original:
-          'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg',
-        description: 'Hokkaido Flower',
-      },
-*/  
+document.querySelector('.gallery').appendChild(initImages(images));
 
-const createImage = ({ preview, oryginal, description }) => {
-    const li = document.createElement("li");
-    li.classList.add("gallery-item");
-    const HTML = 
-    `<a class="gallery-link" href="${oryginal}">
-		<img 
-			class="gallery-image" 
-			src="${preview}" 
-			alt="${description}" 
-			/>
-	    </a>`;
+const lightbox = new SimpleLightbox('ul.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-    return li;
-};
-
-const initImages = (images) => {
-    const imgs = images.map(createImage);
-    
-    const fragment = document.createDocumentFragment();
-    fragment.append(...imgs);
-    return fragment;
-};
-
-const main = () => {
-    document.querySelector(".gallery").appendChild(initImages(images));
-};
-
-main()
-
-const lightbox = new SimpleLightbox("ul.gallery li", {
-    captionType: "alt"
- });
+lightbox.on('show.simplelightbox', function () {
+  console.log('Lightbox on');
+});
